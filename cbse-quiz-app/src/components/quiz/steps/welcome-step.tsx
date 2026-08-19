@@ -8,7 +8,7 @@ import { LogoImage } from "@/components/shared/logo-image";
 import { PrimaryButton } from "@/components/shared/primary-button";
 import { useQuizStore } from "@/store/use-quiz-store";
 
-const SCHOOL_NAME = "Your School Name";
+const SCHOOL_NAME = "Delhi Public Secondary School, Barasat";
 const QUIZ_TITLE = "BrainSpark CBSE";
 
 export function WelcomeStep({ onNext }: { onNext: () => void }) {
@@ -40,7 +40,11 @@ export function WelcomeStep({ onNext }: { onNext: () => void }) {
 
           <p className="flex items-center justify-center gap-2 text-white/75">
             <Sparkles className="h-4 w-4 text-cyan-300" />
-            AI-powered CBSE practice for Classes I to VI
+            <span>AI-powered CBSE practice for Classes I to VI</span>
+          </p>
+
+          <p className="text-sm text-white/60">
+            Made by the students of class XI
           </p>
         </div>
 

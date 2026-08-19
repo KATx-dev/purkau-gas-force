@@ -1,10 +1,28 @@
-// src/lib/gemini.ts
-import { GoogleGenerativeAI } from "@google/generative-ai";
+export async function generateGeminiText(prompt: string): Promise<string> {
+  const response = await fetch("/api/gemini", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ prompt })
+  });
 
-const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY ?? "";
+  const body = (await response.json().catch(() => null)) as
+    | { text?: unknown; error?: unknown }
+    | null;
 
-const genAI = new GoogleGenerativeAI(apiKey);
+  if (!response.ok) {
+    const message =
+      typeof body?.error === "string"
+        ? body.error
+        : "Gemini could not generate a response.";
 
-export const geminiModel = genAI.getGenerativeModel({
-  model: "gemini-2.5-flash-lite"
-});
+    throw new Error(message);
+  }
+
+  if (typeof body?.text !== "string" || !body.text.trim()) {
+    throw new Error("Gemini returned an empty response.");
+  }
+
+  return body.text;
+}

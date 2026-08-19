@@ -1,5 +1,5 @@
 // src/lib/quiz-analysis.ts
-import { geminiModel } from "@/lib/gemini";
+import { generateGeminiText } from "@/lib/gemini";
 import type { GeminiAnalysisParams } from "@/types/quiz";
 
 export async function generateQuizAnalysis({
@@ -47,9 +47,7 @@ Do not use markdown.
 `.trim();
 
   try {
-    const result = await geminiModel.generateContent(prompt);
-    const response = await result.response;
-    return response.text();
+    return await generateGeminiText(prompt);
   } catch {
     return `Great effort, ${studentName || "student"}! You scored ${score} out of ${total}. Keep practicing ${subject} and you will become even stronger.`;
   }

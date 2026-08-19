@@ -1,5 +1,5 @@
 // src/lib/quiz-generator.ts
-import { geminiModel } from "@/lib/gemini";
+import { generateGeminiText } from "@/lib/gemini";
 import { extractJsonArray, normalizeQuestions } from "@/lib/quiz-validation";
 import type { GeminiQuizParams, QuizQuestion } from "@/types/quiz";
 
@@ -32,9 +32,7 @@ Requirements:
 - topic must be a short topic name.
 `.trim();
 
-  const result = await geminiModel.generateContent(prompt);
-  const response = await result.response;
-  const text = response.text();
+  const text = await generateGeminiText(prompt);
 
   const parsed = extractJsonArray(text);
   const questions = normalizeQuestions(parsed);
