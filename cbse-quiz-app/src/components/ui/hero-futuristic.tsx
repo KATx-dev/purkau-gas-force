@@ -4,7 +4,7 @@ import { Canvas, extend, useFrame, useThree } from '@react-three/fiber';
 import { useAspect, useTexture } from '@react-three/drei';
 import { useMemo, useRef, useState, useEffect } from 'react';
 import * as THREE from 'three/webgpu';
-import { bloom } from 'three/examples/jsm/tsl/display/BloomNode.js';
+import { bloom } from "three/tsl";
 import { Mesh } from 'three';
 
 import {
