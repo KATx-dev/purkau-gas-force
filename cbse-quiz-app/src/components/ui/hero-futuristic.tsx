@@ -1,20 +1,30 @@
-'use client';
+"use client";
 
-import { Canvas, extend, useFrame, useThree } from '@react-three/fiber';
-import { useAspect, useTexture } from '@react-three/drei';
-import { useMemo, useRef, useState, useEffect } from 'react';
-import * as THREE from 'three/webgpu';
-import { bloom } from "three/tsl";
-import { Mesh } from 'three';
+import { extend, useFrame, useThree } from "@react-three/fiber";
+import { useAspect, useTexture } from "@react-three/drei";
+import { useEffect, useMemo, useRef, useState } from "react";
+import * as THREE from "three/webgpu";
+
+// FIXED: Import bloom directly from three/tsl without the .js extension
+import { bloom } from "three/tsl"; 
 
 import {
-  abs, blendScreen, float, mod, mx_cell_noise_float, oneMinus,
-  smoothstep, texture, uniform, uv, vec2, vec3, pass, mix, add
-} from 'three/tsl';
-
-// High-quality Unsplash assets for WebGL mapping
-const TEXTUREMAP = { src: 'https://images.unsplash.com/photo-1634017839464-5c339afa60f0?auto=format&fit=crop&q=80&w=1000' };
-const DEPTHMAP = { src: 'https://images.unsplash.com/photo-1557683316-973603aaf5b3?auto=format&fit=crop&q=80&w=1000' };
+  abs,
+  add,
+  blendScreen,
+  float,
+  mix,
+  mod,
+  mx_cell_noise_float,
+  oneMinus,
+  pass,
+  smoothstep,
+  texture,
+  uniform,
+  uv,
+  vec2,
+  vec3
+} from "three/tsl";
 
 extend(THREE as any);
 
