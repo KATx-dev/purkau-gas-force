@@ -3,7 +3,12 @@
 
 import { useCallback } from "react";
 import gsap from "gsap";
-import { QuizBackground } from "@/components/background/quiz-background";
+import dynamic from "next/dynamic";
+
+const QuizBackground = dynamic(
+  () => import("@/components/background/quiz-background").then((mod) => mod.QuizBackground),
+  { ssr: false } // This tells Next.js: "Do not build this on the server"
+);
 import { ActiveQuizStep } from "@/components/quiz/steps/active-quiz-step";
 import { ClassSubjectStep } from "@/components/quiz/steps/class-subject-step";
 import { QuizSettingsStep } from "@/components/quiz/steps/quiz-settings-step";
